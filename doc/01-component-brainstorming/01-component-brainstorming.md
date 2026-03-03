@@ -6,7 +6,7 @@
 
 ## Assignment Overview
 
-<!-- TODO: read the assignment overview then delete this comment -->
+
 
 The overall goal of the portfolio project is to have you design and implement
 your own OSU component. There are no limits to what you choose to design and
@@ -29,7 +29,7 @@ implement.
 
 ## Assignment Checklist
 
-<!-- TODO: browse the checklist then delete this comment -->
+
 
 To be sure you have completed everything on this assignment, we have littered
 this document with TODO comments. You can browse all of them in VSCode by
@@ -52,7 +52,7 @@ to the tree diagram (you may remove this one as well):
 
 ## Assignment Learning Objectives
 
-<!-- TODO: read the assignment learning objectives then delete this comment -->
+
 
 Without learning objectives, there really is no clear reason why a particular
 assessment or activity exists. Therefore, to be completely transparent, here is
@@ -67,7 +67,7 @@ project. Specifically, students should be able to:
 
 ## Assignment Rubric: 10 Points
 
-<!-- TODO: read the assignment rubric then delete this comment -->
+
 
 Again, to be completely transparent, most of the portfolio project, except the
 final submission, is designed as a formative assessment. Formative assessments
@@ -114,7 +114,7 @@ reason -->
 
 ## Assignment
 
-<!-- TODO: read the assignment section then delete this comment -->
+
 
 As previously stated, you are tasked with brainstorming 3 possible components.
 To aid you in this process, we have provided [some example components][example-components]
@@ -122,7 +122,7 @@ that may help you in your brainstorming. All of these components were made at
 some point by one of your peers, so you should feel confident that you can
 accomplish any of them.
 
-<!-- TODO: browse the list of possible projects then delete this comment -->
+
 
 There is no requirement that you use any of the components listed above.
 If you want to model something else, go for it! Very common early object
@@ -143,7 +143,7 @@ about different ways you might allow a client to manipulate your component.
 
 ### Example Component
 
-<!-- TODO: review this example component then delete this comment -->
+>
 
 To help you brainstorm a few components, we've provided an example below of a
 component you already know well: NaturalNumber. We highly recommend that you
@@ -211,13 +211,29 @@ will likely refine your design to make your implementation easier to use.
 
 > Please use this section to share your designs.
 
-- Component Design #1: <!-- TODO: give component a name then delete this comment -->
+- Component Design #1: Anime Library
   - **Description**:
-    - <!-- TODO: describe your component then delete this comment -->
+    - The purpose is to keep track of your previously watched, currectly watching, and the animes
+you plan on watching in the future, while also allowing you to store the ones you've watched
+into a tierlist.
   - **Kernel Methods**:
-    - <!-- TODO: list kernel methods then delete this comment -->
+    - void advance(String show): advances to next in sequence(cannot call on already watched)
+    - void add(String show): adds to watchlist (no duplicates)
+    - String remove (String show): removes from watchlist(only) and returns it
+    - boolean contains(String show): returns if show is in this or not
+    - int length(int section): returns length of section(watchlist, curr, or watch
+     with 1, 2, and 3 as int parameters and correspond to each).
+     -void add tier(String tier): add tier to this (must be in watched)
   - **Secondary Methods**:
-    - <!-- TODO: list secondary methods then delete this comment -->
+    - int lengthOfAll(): returns full length of this
+    - void changeTier(String tier): changes tier (must be in watched)
+    - int section(): returns 1, 2, or 3 depending on the section it's in. returns 0 if
+      it isn't contained
+    - String tier (String show): returns tier show is in
+    - void moveToFinish(String show): skips curr and moves show in watchlist to watched
+    - void moveToFinish(String show, String tier): overloads and allows you to add tier at
+      the same time.
+
   - **Additional Considerations** (*note*: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
@@ -232,13 +248,18 @@ will likely refine your design to make your implementation easier to use.
       Answer, explain, and give at least one example:
       - <!-- TODO: provide an argument then delete this comment -->
 
-- Component Design #2: <!-- TODO: give component a name then delete this comment -->
+- Component Design #2: Outfit Saver
   - **Description**:
-    - <!-- TODO: describe your component then delete this comment -->
+    - A component that saves created outfits and allows you to create new outfit combos.
   - **Kernel Methods**:
-    - <!-- TODO: list kernel methods then delete this comment -->
+    - void createItem(String itemDescription): adds clothing item to set
+    - String removeItem(String item): removes item from set of items and returns it
+    - Set<Integer> createOutfit(int args...): creates an outfit from the set of items
+    - void deleteOutfit(Set<Integer> outfit): deletes outfit
   - **Secondary Methods**:
-    - <!-- TODO: list secondary methods then delete this comment -->
+    - void changeOutfit(Set<Integer> outfit, String oldItem, String newItem): modifies
+      outfit
+    - Set<Integer> copyOutfit(Set<Integer> outfit): create a copy of outfit
   - **Additional Considerations** (*note*: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
@@ -253,13 +274,19 @@ will likely refine your design to make your implementation easier to use.
       Answer, explain, and give at least one example:
       - <!-- TODO: provide an argument then delete this comment -->
 
-- Component Design #3: <!-- TODO: give component a name then delete this comment -->
+- Component Design #3: Maintainance Tracker
   - **Description**:
-    - <!-- TODO: describe your component then delete this comment -->
+    - Tracks the mileage and maintainance history of your car.
   - **Kernel Methods**:
-    - <!-- TODO: list kernel methods then delete this comment -->
+    - NaturalNumber currentMileage(): returns the current mileage of this
+    - NaturalNumber addedMiles(NaturalNumber miles): adds miles to this and returns it
+    - void addService(String service, NaturalNumber occurance): adds new service
+      and holds how often it needs to be done
+    - void recordService(String service): records the service is done and resets
+      counter.
   - **Secondary Methods**:
-    - <!-- TODO: list secondary methods then delete this comment -->
+    - NaturalNumber milesSince(String service): returns the miles since service
+    - boolean isDue(String service): returns is due for service
   - **Additional Considerations** (*note*: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
