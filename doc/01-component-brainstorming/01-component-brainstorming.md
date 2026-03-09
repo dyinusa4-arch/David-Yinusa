@@ -1,8 +1,8 @@
 # Portfolio Part 1: Component Brainstorming
 
-- **Name**: <!-- TODO: fill with first and last name (e.g., Brutus Buckeye) then delete this comment -->
-- **Dot Number**: <!-- TODO: fill with OSU dot number (e.g., buckeye.17) then delete this comment -->
-- **Due Date**: <!-- TODO: fill with due date and time (e.g., 10/17 @ 3:10 PM EST) then delete this comment -->
+- **Name**: David Yinusa
+- **Dot Number**: yinusa.3
+- **Due Date**: 2/6 @ 1:50 PM
 
 ## Assignment Overview
 
@@ -106,11 +106,10 @@ Below is further rationale/explanation for the rubric items above:
 > brainstorming. Plus it helps us get to know you better! Feel free to share
 > images in this section.
 
-<!-- TODO: briefly talk about your interests then delete this comment.
-Also, protip: you can preview what your response looks like by hitting
-the magnifying glass icon in the upper-right corner or pressing CTRL+K and
-then V. This kind of button combination is called a chord, for whatever
-reason -->
+For my career goals, I'm not really sure yet what I really want to get into with my CSE degree, I want to really
+explore my options and do more research before I commit to one thing. Some of my main personal goals are
+watching anime/ reading manga and playing videos games (when I can) and my more secondary interests are in
+cars, fashion and music.
 
 ## Assignment
 
@@ -223,7 +222,7 @@ into a tierlist.
     - boolean contains(String show): returns if show is in this or not
     - int length(int section): returns length of section(watchlist, curr, or watch
      with 1, 2, and 3 as int parameters and correspond to each).
-     -void add tier(String tier): add tier to this (must be in watched)
+     -void add tier(String show, String tier): add tier to this (must be in watched)
   - **Secondary Methods**:
     - int lengthOfAll(): returns full length of this
     - void changeTier(String tier): changes tier (must be in watched)
@@ -237,16 +236,16 @@ into a tierlist.
   - **Additional Considerations** (*note*: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes it will be mutable because the state of the component will be contstantly changing.
     - Would this component rely on any internal classes (e.g., `Map.Pair`)?
       Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes it would, it would use two sets and a map
     - Would this component need any enums or constants (e.g.,
       `Program.Instruction`)? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - I don't think so
     - Can you implement your secondary methods using your kernel methods?
       Answer, explain, and give at least one example:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, for example, lengthOfAll will be implemented using length.
 
 - Component Design #2: Outfit Saver
   - **Description**:
@@ -263,16 +262,18 @@ into a tierlist.
   - **Additional Considerations** (*note*: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, this will be mutable because you'll be allowed to change the outfit once it's
+created.
     - Would this component rely on any internal classes (e.g., `Map.Pair`)?
       Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, it would use sets, maybe a set of sets.
     - Would this component need any enums or constants (e.g.,
       `Program.Instruction`)? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - I'm not sure
     - Can you implement your secondary methods using your kernel methods?
       Answer, explain, and give at least one example:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, changeOutfit will be implemented using createOutfit and the elements
+        in the outfit to copy.
 
 - Component Design #3: Maintainance Tracker
   - **Description**:
@@ -290,16 +291,16 @@ into a tierlist.
   - **Additional Considerations** (*note*: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes this will be mutable because there are multiple different states.
     - Would this component rely on any internal classes (e.g., `Map.Pair`)?
       Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, it will likely use naturalnumber to ensure non-negative entries.
     - Would this component need any enums or constants (e.g.,
       `Program.Instruction`)? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - I'm not sure
     - Can you implement your secondary methods using your kernel methods?
       Answer, explain, and give at least one example:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, milesSince will use a difference between currentMile and milesAdded.
 
 ## Post-Assignment
 
@@ -308,7 +309,7 @@ completed the assignment.
 
 ### Changelog
 
-<!-- TODO: create CHANGELOG then delete this comment -->
+
 
 At the end of every assignment, you should update the
 [CHANGELOG.md](../../CHANGELOG.md) file found in the root of the project folder.
@@ -347,7 +348,6 @@ of development.
 
 ### Submission
 
-<!-- TODO: read the submission instructions then delete this comment -->
 
 If you have completed the assignment using this template, we recommend that
 you convert it to a PDF before submission. If you're not sure how, check out
@@ -357,11 +357,9 @@ all your work is there before submitting. For future assignments, you will
 just be submitting a link to a pull request. This will be the only time
 you have to submit any PDFs.
 
-<!-- TODO: upload a PDF of this document and the CHANGELOG to Carmen then delete this comment -->
 
 ### Peer Review
 
-<!-- TODO: review the peer review guidelines then delete this comment -->
 
 Following the completion of this assignment, you will be assigned three
 students' component brainstorming assignments for review. Your job during the
