@@ -213,5 +213,7 @@ public abstract class AnimeLibrarySecondary implements AnimeLibrary {
             String next = watchlist.removeAny();
             sb.append(next + ", ");
         }
+
+        return sb.toString();
     }
 }
