@@ -109,7 +109,7 @@ public interface AnimeLibraryKernel extends Standard<AnimeLibrary> {
      * @ensures every element of showsInCurrWatching is in currWatching and
      *          this.length(2) = |showsInCurrWatching|
      */
-    Set<String> showsInCurrWatching();
+    Set<String> showsInCurrWatch();
 
     /**
      * Returns the shows in watchlist.
