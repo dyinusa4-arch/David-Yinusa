@@ -1,5 +1,7 @@
 import java.util.Set;
 
+import components.standard.Standard;
+
 /**
  * AnimeLibrary kernel component with primary methods.
  */
@@ -23,7 +25,8 @@ public interface AnimeLibraryKernel extends Standard<AnimeLibrary> {
      *            the entry to be removed
      * @return the entry removed
      * @updates this
-     * @requires show is in watchlist and not in currWatched or Watched
+     * @requires show is in watchlist and not in currWatched or Watched and
+     *           this.length(1) > 0
      * @ensures show is no longer in this
      *
      */
@@ -98,4 +101,22 @@ public interface AnimeLibraryKernel extends Standard<AnimeLibrary> {
      * @ensures every element of showsInTier is in the tier in watched
      */
     Set<String> showsInTier(String tier);
+
+    /**
+     * Return the shows in Currently Watching.
+     *
+     * @return set of shows in currently watched
+     * @ensures every element of showsInCurrWatching is in currWatching and
+     *          this.length(2) = |showsInCurrWatching|
+     */
+    Set<String> showsInCurrWatching();
+
+    /**
+     * Returns the shows in watchlist.
+     *
+     * @return set of shows in watchlist
+     * @ensures every element of showsInWatchList is in watchlist and
+     *          this.length(1) = |showsInWatchlist|
+     */
+    Set<String> showsInWatchlist();
 }
