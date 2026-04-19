@@ -38,6 +38,17 @@ public abstract class AnimeLibrarySecondary implements AnimeLibrary {
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null) {
+            return false;
+        }
+
+        if (!(o instanceOf AnimeLibrary)) {
+            return false;
+        }
         AnimeLibrary object = (AnimeLibrary) obj;
 
         boolean equal = true;
@@ -67,64 +78,57 @@ public abstract class AnimeLibrarySecondary implements AnimeLibrary {
 
         //finally check for equality in watched
         if (equal) {
-            Set<String> thisSSTier = this.showsInTier("SS");
-            Set<String> objSSTier = object.showsInTier("SS");
+            Set<String> thisSSTier = this.showsInTier(Tier.SS);
+            Set<String> objSSTier = object.showsInTier(Tier.SS);
 
             equal = thisSSTier.equals(objSSTier);
         }
 
         if (equal) {
-            Set<String> thisSTier = this.showsInTier("S");
-            Set<String> objSTier = object.showsInTier("S");
+            Set<String> thisSTier = this.showsInTier(Tier.S);
+            Set<String> objSTier = object.showsInTier(Tier.S);
 
             equal = thisSTier.equals(objSTier);
         }
 
         if (equal) {
-            Set<String> thisATier = this.showsInTier("A");
-            Set<String> objATier = object.showsInTier("A");
+            Set<String> thisATier = this.showsInTier(Tier.A);
+            Set<String> objATier = object.showsInTier(Tier.A);
 
             equal = thisATier.equals(objATier);
         }
 
         if (equal) {
-            Set<String> thisBTier = this.showsInTier("B");
-            Set<String> objBTier = object.showsInTier("B");
+            Set<String> thisBTier = this.showsInTier(Tier.B);
+            Set<String> objBTier = object.showsInTier(Tier.B);
 
             equal = thisBTier.equals(objBTier);
         }
 
         if (equal) {
-            Set<String> thisCTier = this.showsInTier("C");
-            Set<String> objCTier = object.showsInTier("C");
+            Set<String> thisCTier = this.showsInTier(Tier.C);
+            Set<String> objCTier = object.showsInTier(Tier.C);
 
             equal = thisCTier.equals(objCTier);
         }
 
         if (equal) {
-            Set<String> thisCTier = this.showsInTier("C");
-            Set<String> objCTier = object.showsInTier("C");
-
-            equal = thisCTier.equals(objCTier);
-        }
-
-        if (equal) {
-            Set<String> thisDTier = this.showsInTier("D");
-            Set<String> objDTier = object.showsInTier("D");
+            Set<String> thisDTier = this.showsInTier(Tier.D);
+            Set<String> objDTier = object.showsInTier(Tier.D);
 
             equal = thisDTier.equals(objDTier);
         }
 
         if (equal) {
-            Set<String> thisETier = this.showsInTier("E");
-            Set<String> objETier = object.showsInTier("E");
+            Set<String> thisETier = this.showsInTier(Tier.E);
+            Set<String> objETier = object.showsInTier(Tier.E);
 
             equal = thisETier.equals(objETier);
         }
 
         if (equal) {
-            Set<String> thisURTier = this.showsInTier("Unranked");
-            Set<String> objURTier = object.showsInTier("Unranked");
+            Set<String> thisURTier = this.showsInTier(Tier.Unranked);
+            Set<String> objURTier = object.showsInTier(Tier.Unranked);
 
             equal = thisURTier.equals(objURTier);
         }
