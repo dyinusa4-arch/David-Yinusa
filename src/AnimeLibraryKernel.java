@@ -59,13 +59,11 @@ public interface AnimeLibraryKernel extends Standard<AnimeLibrary> {
      * Reports the length of a certain section in the sequence.
      *
      * @param section
-     *            int values 1, 2, or 3 meaning watchlist, currently watching,
-     *            or watched respectively
+     *            one of the sections from the enum class "Section"
      * @return number of shows in section
-     * @requires section = 1 || 2 || 3
      * @ensures length = the number of shows in the specified section
      */
-    int length(int section);
+    int length(Section section);
 
     /**
      * Changes tier of {@code show}.
@@ -73,13 +71,11 @@ public interface AnimeLibraryKernel extends Standard<AnimeLibrary> {
      * @param show
      *            the show the tier's being changed to
      * @param tier
-     *            the tier to be assigned to {@code show}
-     * @requires show is in watched and tier is a valid entry(SS, S, A, B, C, D
-     *           E, Unranked)
+     *            the tier from Tier enum class to be assigned to {@code show}
      * @updates this
-     * @ensures show is associated this tier
+     * @ensures {@code show} is in this.showsInTier(tier)
      */
-    void changeTier(String show, String tier);
+    void changeTier(String show, Tier tier);
 
     /**
      * Returns the tier of {@code show}.
@@ -88,9 +84,9 @@ public interface AnimeLibraryKernel extends Standard<AnimeLibrary> {
      *            the show whose tier is being returned
      * @return tier of show
      * @requires show is in watched
-     * @ensures tier = tier associated with show and this is unchanged
+     * @ensures tier = tier associated with show
      */
-    String tier(String show);
+    Tier tier(String show);
 
     /**
      * Returns the set of shows in {@code tier}.
@@ -100,14 +96,14 @@ public interface AnimeLibraryKernel extends Standard<AnimeLibrary> {
      * @return set of shows in tier
      * @ensures every element of showsInTier is in the tier in watched
      */
-    Set<String> showsInTier(String tier);
+    Set<String> showsInTier(Tier tier);
 
     /**
      * Return the shows in Currently Watching.
      *
      * @return set of shows in currently watched
      * @ensures every element of showsInCurrWatching is in currWatching and
-     *          this.length(2) = |showsInCurrWatching|
+     *          this.length(currWatch) = |showsInCurrWatching|
      */
     Set<String> showsInCurrWatch();
 
@@ -116,7 +112,7 @@ public interface AnimeLibraryKernel extends Standard<AnimeLibrary> {
      *
      * @return set of shows in watchlist
      * @ensures every element of showsInWatchList is in watchlist and
-     *          this.length(1) = |showsInWatchlist|
+     *          this.length(Watchlist) = |showsInWatchlist|
      */
     Set<String> showsInWatchlist();
 }
