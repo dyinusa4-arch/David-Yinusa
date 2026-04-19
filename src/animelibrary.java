@@ -7,7 +7,7 @@ public interface AnimeLibrary extends AnimeLibraryKernel {
      * Returns the length of {@code this}.
      *
      * @return the number of shows in this
-     * @ensures lengthOfAll = length(1) + length(2) + length(3)
+     * @ensures lengthOfAll = length(Watchlist) + length(currWatch) + length(Watched)
      */
     int lengthOfAll();
 
@@ -18,7 +18,8 @@ public interface AnimeLibrary extends AnimeLibraryKernel {
      *            the show to be added to this
      * @requires show is not in this
      * @updates this
-     * @ensures {@code this = <show> * #this} and this.section(show) = 2
+     * @ensures {@code this = <show> * #this} and
+     * this.length(currWatch) = #this.length(currWatch) + 1
      */
     void addToWatching(String show);
 
@@ -29,7 +30,8 @@ public interface AnimeLibrary extends AnimeLibraryKernel {
      *            the show to be added to this
      * @requires show is not in this
      * @updates this
-     * @ensures {@code this = <show> * #this} and this.section(show) = 3
+     * @ensures {@code this = <show> * #this} and
+     * this.length(Watched) = #this.length(Watched) + 1
      */
     void addToWatched(String show);
 
@@ -43,8 +45,8 @@ public interface AnimeLibrary extends AnimeLibraryKernel {
      *            the tier to be assigned to show
      * @requires show is not in this
      * @updates this
-     * @ensures {@code this = <show> * #this} and this.section(show) = 3 and
-     *          this.tier(show) = {@code tier}
+     * @ensures {@code this = <show> * #this} and this.tier(show) = {@code tier}
+     * and this.length(Watched) = #this.length(Watched) + 1
      */
-    void addToWatched(String show, String tier);
+    void addToWatched(String show, Tier tier);
 }
