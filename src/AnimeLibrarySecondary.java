@@ -10,7 +10,8 @@ public abstract class AnimeLibrarySecondary implements AnimeLibrary {
      */
 
     public int lengthOfAll() {
-        return this.length(1) + this.length(2) + this.length(3);
+        return this.length(Watchlist) + this.length(currWatch)
+                + this.length(Watched);
     }
 
     public void addToWatching(String show) {
@@ -24,7 +25,7 @@ public abstract class AnimeLibrarySecondary implements AnimeLibrary {
         this.advance(show);
     }
 
-    public void addToWatched(String show, String tier) {
+    public void addToWatched(String show, Tier tier) {
         this.add(show);
         this.advance(show);
         this.advance(show);
@@ -42,9 +43,9 @@ public abstract class AnimeLibrarySecondary implements AnimeLibrary {
         boolean equal = true;
 
         //first checks length
-        if (this.length(1) != object.length(1)
-                || this.length(2) != object.length(2)
-                || this.length(3) != object.length(3)) {
+        if (this.length(Watchlist) != object.length(Watchlist)
+                || this.length(currWatch) != object.length(currWatch)
+                || this.length(Watched) != object.length(Watched)) {
             equal = false;
         }
 
