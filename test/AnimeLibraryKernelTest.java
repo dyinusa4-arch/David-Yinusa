@@ -1,3 +1,5 @@
+import components.set.Set;
+
 /**
  * JUnit test fixtures for {@code AnimeLibraryKernel}.
  *
@@ -129,21 +131,23 @@ public class AnimeLibraryKernelTest {
     public final void testRemoveLeavingEmpty() {
         AnimeLibrary test = this.createFronArgs("DBZ");
 
-        test.remove("DBZ");
+        String show = test.remove("DBZ");
 
         assertEquals(!test.contains("DBZ"), true);
         assertEquals(test.length(Section.Watchlist), 0);
+        assertEquals(show, "DBZ");
     }
 
     @Test
     public final void testRemoveLeavingOne() {
         AnimeLibrary test = this.createFromArgs("DBZ", "AOT");
 
-        test.remove("DBZ");
+        String show = test.remove("DBZ");
 
         assertEquals(!test.contains("DBZ"), true);
         assertEquals(test.contains("AOT"), true);
         assertEquals(test.length(Section.Watchlist), 1);
+        assertEquals(show, "DBZ");
     }
 
     @Test
@@ -151,13 +155,14 @@ public class AnimeLibraryKernelTest {
         AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
                 "next", "Bleach", "JBA", "next", "HxH", "JJK");
 
-        test.remove("DBZ");
+        String show = test.remove("DBZ");
 
         assertEquals(!test.contains("DBZ"), true);
         assertEquals(test.contains("Naruto"), true);
         assertEquals(test.contains("Bleach"), true);
         assertEquals(test.contains("JJK"), true);
         assertEquals(test.length(Section.Watchlist), 2);
+        assertEquals(show, "DBZ");
     }
 
     /*
@@ -184,5 +189,349 @@ public class AnimeLibraryKernelTest {
         assertEquals(test.contains("DBZ"), true);
         assertEquals(test.length(Section.currWatch), 0);
         assertEquals(test.length(Section.Watched), 1);
+    }
+
+    @Test
+    public final void testAdvanceWatchlistToWatchNonEmpty() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "next", "AOT");
+
+        test.advance("DBZ");
+
+        assertEquals(test.contains("DBZ"), true);
+        assertEquals(test.length(Section.currWatch), 2);
+        assertEquals(test.length(Section.Watchlist), 1);
+    }
+
+    @Test
+    public final void testAdvanceWatchToWatchedMany() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK");
+
+        test.advance("JBA");
+
+        assertEquals(test.contains("JBA"), true);
+        assertEquals(test.length(Section.currWatch), 1);
+        assertEquals(test.length(Section.Watchlist), 3);
+        assertEquals(test.length(Section.Watched), 3)
+    }
+
+    /*
+     * Test for contains
+     */
+
+    @Test
+    public final void testContainsEmpty() {
+        AnimeLibrary test = this.createFromArgs();
+        AnimeLibrary testCopy = this.createFromArgs();
+
+        boolean contains = test.contains("DBZ");
+
+        assertEquals(contains, false);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testContainsWatchlistTrue() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
+                "One Piece", "next", "Bleach", "JBA", "next", "HxH", "JJK");
+
+        boolean contains = test.contains("DBZ");
+
+        assertEquals(contains, true);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testContainWatchingTrue() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
+                "One Piece", "next", "Bleach", "JBA", "next", "HxH", "JJK");
+
+        boolean contains = test.contains("JBA");
+
+        assertEquals(contains, true);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testContainsWatchedTrue() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
+                "One Piece", "next", "Bleach", "JBA", "next", "HxH", "JJK");
+
+        boolean contains = test.contains("JJK");
+
+        assertEquals(contains, true);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testContainsFalse() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
+                "One Piece", "next", "Bleach", "JBA", "next", "HxH", "JJK");
+
+        boolean contains = test.contains("FMAB");
+
+        assertEquals(contains, true);
+        assertEquals(test, testCopy);
+    }
+
+    /*
+     * Tests for length
+     */
+
+    @Test
+    public final void testLengthEmpty() {
+        AnimeLibrary test = this.createFromArgs();
+        AnimeLibrary testCopy = this.createFromArgs();
+
+        int length1 = test.length(Section.Watchlist);
+        int length2 = test.length(Section.currWatch);
+        int length3 = test.length(Section.Watched);
+
+        assertEquals(length1, 0);
+        assertEquals(length2, 0);
+        assertEquals(length3, 0);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testLengthWatchlistEmpty() {
+        AnimeLibrary test = this.createFromArgs("next", "DBZ", "Naruto", "next",
+                "AOT", "JJK");
+        AnimeLibrary testCopy = this.createFromArgs("next", "DBZ", "Naruto",
+                "next", "AOT", "JJK");
+
+        int length = test.length(Section.Watchlist);
+
+        assertEquals(length, 0);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testLengthCurrWatchEmpty() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "next", "next",
+                "AOT", "JJK");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto", "next",
+                "next", "AOT", "JJK");
+
+        int length = test.length(Section.currWatch);
+
+        assertEquals(length, 0);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testLengthWatchedEmpty() {
+        AnimeLibrary test = this.createFromArgs("DBZ". "Naruto", "next", "AOT", "JJK");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ". "Naruto", "next", "AOT", "JJK");
+
+        int length = test.length(Section.Watched);
+
+        assertEquals(length, 0);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testLengthNonEmpty() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
+                "One Piece", "next", "Bleach", "JBA", "next", "HxH", "JJK");
+
+        int length1 = test.length(Section.Watchlist);
+        int length2 = test.length(Section.currWatch);
+        int length3 = test.length(Section.Watched);
+
+        assertEquals(length1, 3);
+        assertEquals(length2, 2);
+        assertEquals(length3, 2);
+        assertEquals(test, testCopy);
+    }
+
+    /*
+     * Tests for change tier
+     */
+
+    @Test
+    public final void testChangeTierLeavingEmpty() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH");
+
+        test.changeTier("HxH", Tier.SS);
+
+        assertEquals(test.contains("HxH"), true);
+        assertEquals(test.tier("HxH"), Tier.SS);
+    }
+
+    @Test
+    public final void testChangeTierLeavingNonEmpty() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK");
+
+        test.changeTier("HxH", Tier.SS);
+
+        assertEquals(test.contains("HxH"), true);
+        assertEquals(test.tier("HxH"), Tier.SS);
+    }
+
+    /*
+     * Tests for tier
+     */
+
+    @Test
+    public final void testTierUnranked() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK", "FMAB", "OPM",
+                "DBS", "Hell's Paradise", "Demon Slayer", " KNB");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
+                "One Piece", "next", "Bleach", "JBA", "next", "HxH", "JJK",
+                "FMAB", "OPM", "DBS", "Hell's Paradise", "Demon Slayer",
+                " KNB");
+
+        Tier tier = test.tier("HxH");
+
+        assertEquals(tier, Tier.Unranked);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testTierSS() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK", "FMAB", "OPM",
+                "DBS", "Hell's Paradise", "Demon Slayer", " KNB");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
+                "One Piece", "next", "Bleach", "JBA", "next", "HxH", "JJK",
+                "FMAB", "OPM", "DBS", "Hell's Paradise", "Demon Slayer",
+                " KNB");
+
+        test.changeTier("JJK", Tier.SS);
+        Tier tier = test.tier("JJK");
+
+        assertEquals(tier, Tier.SS);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testTierS() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK", "FMAB", "OPM",
+                "DBS", "Hell's Paradise", "Demon Slayer", " KNB");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
+                "One Piece", "next", "Bleach", "JBA", "next", "HxH", "JJK",
+                "FMAB", "OPM", "DBS", "Hell's Paradise", "Demon Slayer",
+                " KNB");
+
+        test.changeTier("FMAB", Tier.S);
+        Tier tier = test.tier("FMAB");
+
+        assertEquals(tier, Tier.S);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testTierA() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK", "FMAB", "OPM",
+                "DBS", "Hell's Paradise", "Demon Slayer", " KNB");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
+                "One Piece", "next", "Bleach", "JBA", "next", "HxH", "JJK",
+                "FMAB", "OPM", "DBS", "Hell's Paradise", "Demon Slayer",
+                " KNB");
+
+        test.changeTier("OPM", Tier.A);
+        Tier tier = test.tier("OPM");
+
+        assertEquals(tier, Tier.A);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testTierB() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK", "FMAB", "OPM",
+                "DBS", "Hell's Paradise", "Demon Slayer", " KNB");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
+                "One Piece", "next", "Bleach", "JBA", "next", "HxH", "JJK",
+                "FMAB", "OPM", "DBS", "Hell's Paradise", "Demon Slayer",
+                " KNB");
+
+        test.changeTier("DBS", Tier.B);
+        Tier tier = test.tier("DBS");
+
+        assertEquals(tier, Tier.B);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testTierC() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK", "FMAB", "OPM",
+                "DBS", "Hell's Paradise", "Demon Slayer", " KNB");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
+                "One Piece", "next", "Bleach", "JBA", "next", "HxH", "JJK",
+                "FMAB", "OPM", "DBS", "Hell's Paradise", "Demon Slayer",
+                " KNB");
+
+        test.changeTier("Hell's Paradise", Tier.C);
+        Tier tier = test.tier("Hell's Paradise");
+
+        assertEquals(tier, Tier.C);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testTierD() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK", "FMAB", "OPM",
+                "DBS", "Hell's Paradise", "Demon Slayer", " KNB");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
+                "One Piece", "next", "Bleach", "JBA", "next", "HxH", "JJK",
+                "FMAB", "OPM", "DBS", "Hell's Paradise", "Demon Slayer",
+                " KNB");
+
+        test.changeTier("Demon Slayer", Tier.D);
+        Tier tier = test.tier("Demon Slayer");
+
+        assertEquals(tier, Tier.D);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testTierE() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK", "FMAB", "OPM",
+                "DBS", "Hell's Paradise", "Demon Slayer", " KNB");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
+                "One Piece", "next", "Bleach", "JBA", "next", "HxH", "JJK",
+                "FMAB", "OPM", "DBS", "Hell's Paradise", "Demon Slayer",
+                " KNB");
+
+        test.changeTier("KNB", Tier.E);
+        Tier tier = test.tier("KNB");
+
+        assertEquals(tier, Tier.E);
+        assertEquals(test, testCopy);
+    }
+
+    /*
+     * Tests for showsInTier
+     */
+
+    @Test
+    public final void testShowsInTierEmpty() {
+        AnimeLibrary test = this.createFromArgs("DBZ". "Naruto", "next", "AOT", "JJK");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ". "Naruto", "next", "AOT", "JJK");
+
+        Set<String> set = test.showsInTier(Tier.Unranked);
+
+        assertEquals(set.size(), 0);
+        assertEquals(test, testCopy);
     }
 }
