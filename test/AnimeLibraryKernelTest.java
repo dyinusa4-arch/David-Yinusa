@@ -329,8 +329,10 @@ public class AnimeLibraryKernelTest {
 
     @Test
     public final void testLengthWatchedEmpty() {
-        AnimeLibrary test = this.createFromArgs("DBZ". "Naruto", "next", "AOT", "JJK");
-        AnimeLibrary testCopy = this.createFromArgs("DBZ". "Naruto", "next", "AOT", "JJK");
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "next", "AOT",
+                "JJK");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto", "next",
+                "AOT", "JJK");
 
         int length = test.length(Section.Watched);
 
@@ -526,12 +528,126 @@ public class AnimeLibraryKernelTest {
 
     @Test
     public final void testShowsInTierEmpty() {
-        AnimeLibrary test = this.createFromArgs("DBZ". "Naruto", "next", "AOT", "JJK");
-        AnimeLibrary testCopy = this.createFromArgs("DBZ". "Naruto", "next", "AOT", "JJK");
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "next", "AOT",
+                "JJK");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto", "next",
+                "AOT", "JJK");
 
         Set<String> set = test.showsInTier(Tier.Unranked);
 
         assertEquals(set.size(), 0);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testShowInTierOne() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "next", "AOT");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto", "next",
+                "AOT");
+
+        Set<String> set = test.showsInTier(Tier.Unranked);
+
+        assertEquals(set.contains("AOT"), true);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testShowsInTierMoreThanOne() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
+                "One Piece", "next", "Bleach", "JBA", "next", "HxH", "JJK");
+
+        Set<String> set = test.showsInTier(Tier.Unranked);
+
+        assertEquals(set.contains("HxH") && set.contains("JJK"), true);
+        assertEquals(test, testCopy);
+    }
+
+    /*
+     * Tests for showsInCurrWatch
+     */
+
+    @Test
+    public final void testShowsInCurrWatchEmpty() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "next", "next",
+                "AOT", "JJK");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto", "next",
+                "next", "AOT", "JJK");
+
+        Set<String> set = test.showsInCurrWatch();
+
+        assertEquals(set.size(), 0);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testShowsInCurrWatchOne() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "next", "FMAB",
+                "next", "AOT", "JJK");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto", "FMAB",
+                "next", "next", "AOT", "JJK");
+
+        Set<String> set = test.showsInCurrWatch();
+
+        assertEquals(set.contains("FMAB"), true);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testShowsInCurrWatchMoreThanOne() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
+                "One Piece", "next", "Bleach", "JBA", "next", "HxH", "JJK");
+
+        Set<String> set = test.showsInCurrWatch();
+
+        assertEquals(set.contains("Bleach") && set.contains("JBA"), true);
+        assertEquals(test, testCopy);
+    }
+
+    /*
+     * Tests for showsInWatchlist
+     */
+
+    @Test
+    public final void testShowsInWatchlistEmpty() {
+        AnimeLibrary test = this.createFromArgs("next", "DBZ", "Naruto", "next",
+                "AOT", "JJK");
+        AnimeLibrary testCopy = this.createFromArgs("next", "DBZ", "Naruto",
+                "next", "AOT", "JJK");
+
+        Set<String> set = test.showsInWatchlist();
+
+        assertEquals(set.size(), 0);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testShowsInWatchlistOne() {
+        AnimeLibrary test = this.createFromArgs("FMAB", "next", "DBZ", "Naruto",
+                "next", "AOT", "JJK");
+        AnimeLibrary testCopy = this.createFromArgs("FMAB", "next", "DBZ",
+                "Naruto", "next", "AOT", "JJK");
+
+        Set<String> set = test.showsInWatchlist();
+
+        assertEquals(set.contains("FMAB"), true);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testShowsInWatchlistMoreThanOne() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
+                "One Piece", "next", "Bleach", "JBA", "next", "HxH", "JJK");
+
+        Set<String> set = test.showsInWatchlist();
+
+        assertEquals(set.contains("DBZ") && set.contains("Naruto")
+                && set.contains("One Piece"), true);
         assertEquals(test, testCopy);
     }
 }
