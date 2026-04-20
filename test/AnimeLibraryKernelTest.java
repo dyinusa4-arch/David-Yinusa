@@ -38,6 +38,7 @@ public class AnimeLibraryKernelTest {
 
         return al;
     }
+
     /*
      * Test case for constructor
      */
@@ -53,7 +54,7 @@ public class AnimeLibraryKernelTest {
     }
 
     /*
-     * Test for add
+     * Tests for add
      */
 
     @Test
@@ -121,11 +122,67 @@ public class AnimeLibraryKernelTest {
     }
 
     /*
-     * Test for remove
+     * Tests for remove
      */
 
     @Test
     public final void testRemoveLeavingEmpty() {
+        AnimeLibrary test = this.createFronArgs("DBZ");
 
+        test.remove("DBZ");
+
+        assertEquals(!test.contains("DBZ"), true);
+        assertEquals(test.length(Section.Watchlist), 0);
+    }
+
+    @Test
+    public final void testRemoveLeavingOne() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "AOT");
+
+        test.remove("DBZ");
+
+        assertEquals(!test.contains("DBZ"), true);
+        assertEquals(test.contains("AOT"), true);
+        assertEquals(test.length(Section.Watchlist), 1);
+    }
+
+    @Test
+    public final void testRemoveLeavingNonEmpty() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK");
+
+        test.remove("DBZ");
+
+        assertEquals(!test.contains("DBZ"), true);
+        assertEquals(test.contains("Naruto"), true);
+        assertEquals(test.contains("Bleach"), true);
+        assertEquals(test.contains("JJK"), true);
+        assertEquals(test.length(Section.Watchlist), 2);
+    }
+
+    /*
+     * Tests for advance
+     */
+
+    @Test
+    public final void testAdvanceWatchlistToWatchingEmpty() {
+        AnimeLibrary test = this.createFromArgs("DBZ");
+
+        test.advance("DBZ");
+
+        assertEquals(test.contains("DBZ"), true);
+        assertEquals(test.length(Section.currWatch), 1);
+        assertEquals(test.length(Section.Watchlist), 0);
+    }
+
+    @Test
+    public final void testAdvanceWatchingToWatchedEmpty() {
+        AnimeLibrary test = this.createFromArgs("next", "DBZ");
+
+        test.advance("DBZ");
+
+        assertEquals(test.contains("DBZ"), true);
+        assertEquals(test.length(Section.currWatch), 0);
+        assertEquals(test.length(Section.Watched), 1);
     }
 }
