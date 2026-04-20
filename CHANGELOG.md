@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) of
 the following form: YYYY.0M.0D.
 
+## [2026.4.20]
+
+### Added
+
+- Added tests for kernel and secondary methods.
+
+## [2026.4.19]
+
+### Updated
+
+- Updated implementation for equals() method in secondary class
+
 ## [2026.3.9]
 
 ### Added
