@@ -4,6 +4,8 @@ import components.standard.Standard;
 
 /**
  * AnimeLibrary kernel component with primary methods.
+ *
+ * @author David Yinusa
  */
 public interface AnimeLibraryKernel extends Standard<AnimeLibrary> {
 
@@ -72,6 +74,7 @@ public interface AnimeLibraryKernel extends Standard<AnimeLibrary> {
      *            the show the tier's being changed to
      * @param tier
      *            the tier from Tier enum class to be assigned to {@code show}
+     * @requires show is in watched
      * @updates this
      * @ensures {@code show} is in this.showsInTier(tier)
      */
@@ -115,4 +118,15 @@ public interface AnimeLibraryKernel extends Standard<AnimeLibrary> {
      *          this.length(Watchlist) = |showsInWatchlist|
      */
     Set<String> showsInWatchlist();
+
+    /**
+     * Return the section {@code show} is in.
+     *
+     * @param show
+     *            the show whose section is being returned
+     * @return the section show is in
+     * @requires show is in this
+     * @ensures section = section associated with show
+     */
+    Section section(String show);
 }
