@@ -1,3 +1,5 @@
+package components.animelibrary;
+
 /**
  * {@code AnimeLibraryKernel} enhanced with secondary methods.
  *

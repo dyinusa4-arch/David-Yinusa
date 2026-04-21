@@ -1,3 +1,5 @@
+package components.animelibrary;
+
 import components.set.Set;
 import components.standard.Standard;
 

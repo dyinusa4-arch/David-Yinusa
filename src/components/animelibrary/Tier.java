@@ -1,3 +1,5 @@
+package components.animelibrary;
+
 /**
  * Enum class for tiers of shows.
  *
