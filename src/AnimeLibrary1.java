@@ -23,6 +23,8 @@ import components.set.Set1L;
  * this = union of all (tiers, shows) in this.watched union
  * elements of this.currWatch union  elements of this.watchlist.
  * </pre>
+ *
+ * @author David Yinusa
  */
 public class AnimeLibrary1 extends AnimeLibrary {
     /*
@@ -185,17 +187,17 @@ public class AnimeLibrary1 extends AnimeLibrary {
 
     @Override
     public final void changeTier(String show, Tier tier) {
-        //ensures shows is in watched
-        boolean inWatched = false;
+        assert show != null : "Violation of: x is not null";
+        assert this.section(
+                show) == Section.Watched : "Violation of: show is not in watched";
+
+        //iterte over watched
         Tier oldTier;
         for (Map.Pair<Tier, Set<String>> pair : this.watched) {
             if (pair.value().contains(show)) {
-                inWatched = true;
                 oldTier = pair.key();
             }
         }
-        assert show != null : "Violation of: x is not null";
-        assert inWatched : "Violation of: show is not in watched";
 
         //removing from old tier
         Map.Pair<Tier, Set<String>> pair = this.watched.remove(oldTier);
@@ -211,25 +213,25 @@ public class AnimeLibrary1 extends AnimeLibrary {
 
     @Override
     public final Tier tier(String show) {
-        //ensures shows is in watched
-        boolean inWatched = false;
-        Tier oldTier;
+        assert show != null : "Violation of: x is not null";
+        assert this.section(
+                show) == Section.Watched : "Violation of: show is not in watched";
+
+        //iterate over watched
+        Tier tier;
         for (Map.Pair<Tier, Set<String>> pair : this.watched) {
             if (pair.value().contains(show)) {
-                inWatched = true;
-                oldTier = pair.key();
+                tier = pair.key();
             }
         }
-        assert show != null : "Violation of: x is not null";
-        assert inWatched : "Violation of: show is not in watched";
 
-        return oldTier;
+        return tier;
     }
 
     @Override
     public final Set<String> showsInTier(Tier tier) {
         Map.Pair<Tier, Set<String>> pair = this.watched.remove(tier);
-        //avoid aliasing
+        //Creating copies to avoid aliasing
         Set<String> copy = pair.value().newInstance();
         Set<String> temp = copy.newInstance();
 
@@ -245,6 +247,56 @@ public class AnimeLibrary1 extends AnimeLibrary {
 
         return copy;
 
+    }
+
+    @Override
+    public final Set<String> showsInCurrWatch() {
+        Set<String> showsInCurrWatch = this.currWatch.newInstance();
+        Set<String> temp = this.currWatch.newInstance();
+
+        //Creating copies to avoid aliasing
+        while (this.currWatch.size() > 0) {
+            String next = this.currWatch.removeAny();
+            showsInCurrWatch.add(next);
+            temp.add(next);
+        }
+
+        this.currWatch.transferFrom(temp);
+
+        return showsInCurrWatch;
+    }
+
+    @Override
+    public final Set<String> showsInWatchlist() {
+        Set<String> showsInWatchlist = this.watchlist.newInstance();
+        Set<String> temp = this.watchlist.newInstance();
+
+        //Creating copies to avoid aliasing
+        while (this.watchlist.size() > 0) {
+            String next = this.watchlist.removeAny();
+            showsInWatchlist.add(next);
+            temp.add(next);
+        }
+
+        this.watchlist.transferFrom(temp);
+
+        return showsInWatchlist;
+    }
+
+    @Override
+    public final Section section(String show) {
+        assert show != null : "Violation of: show is not null";
+        assert this.contains(show) : "Violation of: show is in this";
+
+        if (this.watchlist.contains(show)) {
+            return Section.Watchlist;
+        }
+
+        if (this.currWatch.contains(show)) {
+            return Section.currWatch;
+        }
+
+        return Section.Watched;
     }
 
 }
