@@ -1,3 +1,7 @@
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 /**
  * JUnit test fixture for {@code AnimeLibrarySecondary}.
  *
@@ -21,7 +25,7 @@ public class AnimeLibrarySecondaryTest {
         int count = 0;
 
         //create AnimeLibrary object
-        AnimeLibrary al = new AnimeLibrary();
+        AnimeLibrary al = new AnimeLibrary1();
 
         //iterate over args
         for (int i = 0; i < args.length; i++) {
@@ -165,7 +169,7 @@ public class AnimeLibrarySecondaryTest {
     }
 
     @Test
-    public final void testAddToWatchedEmpty() {
+    public final void testAddToWatchedTierEmpty() {
         AnimeLibrary test = this.createFromArgs();
 
         int length = test.length(Section.Watched);
@@ -191,7 +195,7 @@ public class AnimeLibrarySecondaryTest {
     }
 
     @Test
-    public final void testAddToWatchedOne() {
+    public final void testAddToWatchedTierOne() {
         AnimeLibrary test = this.createFromArgs("next", "next", "AOT");
 
         int length = test.length(Section.Watched);
@@ -218,7 +222,7 @@ public class AnimeLibrarySecondaryTest {
     }
 
     @Test
-    public final void testAddToWatchedNonEmpty() {
+    public final void testAddToWatchedTierNonEmpty() {
         AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
                 "next", "Bleach", "JBA", "next", "HxH", "JJK");
 

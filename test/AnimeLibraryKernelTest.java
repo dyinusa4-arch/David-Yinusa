@@ -1,3 +1,7 @@
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 import components.set.Set;
 
 /**
@@ -47,7 +51,7 @@ public class AnimeLibraryKernelTest {
 
         @Test
         public final void testNoArgsConstructor() {
-                AnimeLibrary test = new AnimeLibrary();
+                AnimeLibrary test = new AnimeLibrary1();
 
                 //ensuring everything is empty
                 assertEquals(test.length(Section.Watchlist), 0);
@@ -61,11 +65,11 @@ public class AnimeLibraryKernelTest {
 
         @Test
         public final void testAddEmpty() {
-                AnimeLibrary test = new AnimeLibrary();
-
-                test.add("DBZ");
+                AnimeLibrary test = new AnimeLibrary1();
 
                 int length = test.length(Section.Watchlist);
+
+                test.add("DBZ");
 
                 assertEquals(test.contains("DBZ"), true);
                 assertEquals(test.length(Section.Watchlist), length + 1);
@@ -73,7 +77,7 @@ public class AnimeLibraryKernelTest {
 
         @Test
         public final void testAddWlNonEmpty() {
-                AnimeLibrary test = new AnimeLibrary();
+                AnimeLibrary test = new AnimeLibrary1();
 
                 test.add("DBZ");
                 int length = test.length(Section.Watchlist);
@@ -86,7 +90,7 @@ public class AnimeLibraryKernelTest {
 
         @Test
         public final void testAddWatchingNonEmpty() {
-                AnimeLibrary test = new AnimeLibrary();
+                AnimeLibrary test = new AnimeLibrary1();
 
                 test.add("DBZ");
                 test.advance("DBZ");
@@ -130,7 +134,7 @@ public class AnimeLibraryKernelTest {
 
         @Test
         public final void testRemoveLeavingEmpty() {
-                AnimeLibrary test = this.createFronArgs("DBZ");
+                AnimeLibrary test = this.createFromArgs("DBZ");
 
                 String show = test.remove("DBZ");
 
@@ -205,18 +209,19 @@ public class AnimeLibraryKernelTest {
                 assertEquals(test.length(Section.Watchlist), 1);
         }
 
-    @Test
-    public final void testAdvanceWatchToWatchedMany() {
-        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
-                "next", "Bleach", "JBA", "next", "HxH", "JJK");
+        @Test
+        public final void testAdvanceWatchToWatchedMany() {
+                AnimeLibrary test = this.createFromArgs("DBZ", "Naruto",
+                                "One Piece", "next", "Bleach", "JBA", "next",
+                                "HxH", "JJK");
 
-        test.advance("JBA");
+                test.advance("JBA");
 
-        assertEquals(test.contains("JBA"), true);
-        assertEquals(test.length(Section.currWatch), 1);
-        assertEquals(test.length(Section.Watchlist), 3);
-        assertEquals(test.length(Section.Watched), 3)
-    }
+                assertEquals(test.contains("JBA"), true);
+                assertEquals(test.length(Section.currWatch), 1);
+                assertEquals(test.length(Section.Watchlist), 3);
+                assertEquals(test.length(Section.Watched), 3);
+        }
 
         /*
          * Test for contains
@@ -289,7 +294,7 @@ public class AnimeLibraryKernelTest {
 
                 boolean contains = test.contains("FMAB");
 
-                assertEquals(contains, true);
+                assertEquals(contains, false);
                 assertEquals(test, testCopy);
         }
 
@@ -431,6 +436,8 @@ public class AnimeLibraryKernelTest {
                                 "Hell's Paradise", "Demon Slayer", " KNB");
 
                 test.changeTier("JJK", Tier.SS);
+                testCopy.changeTier("JJK", Tier.SS);
+
                 Tier tier = test.tier("JJK");
 
                 assertEquals(tier, Tier.SS);
@@ -449,6 +456,8 @@ public class AnimeLibraryKernelTest {
                                 "Hell's Paradise", "Demon Slayer", " KNB");
 
                 test.changeTier("FMAB", Tier.S);
+                testCopy.changeTier("FMAB", Tier.S);
+
                 Tier tier = test.tier("FMAB");
 
                 assertEquals(tier, Tier.S);
@@ -467,6 +476,8 @@ public class AnimeLibraryKernelTest {
                                 "Hell's Paradise", "Demon Slayer", " KNB");
 
                 test.changeTier("OPM", Tier.A);
+                testCopy.changeTier("OPM", Tier.A);
+
                 Tier tier = test.tier("OPM");
 
                 assertEquals(tier, Tier.A);
@@ -485,6 +496,8 @@ public class AnimeLibraryKernelTest {
                                 "Hell's Paradise", "Demon Slayer", " KNB");
 
                 test.changeTier("DBS", Tier.B);
+                testCopy.changeTier("DBS", Tier.B);
+
                 Tier tier = test.tier("DBS");
 
                 assertEquals(tier, Tier.B);
@@ -503,6 +516,8 @@ public class AnimeLibraryKernelTest {
                                 "Hell's Paradise", "Demon Slayer", " KNB");
 
                 test.changeTier("Hell's Paradise", Tier.C);
+                testCopy.changeTier("Hell's Paradise", Tier.C);
+
                 Tier tier = test.tier("Hell's Paradise");
 
                 assertEquals(tier, Tier.C);
@@ -521,6 +536,8 @@ public class AnimeLibraryKernelTest {
                                 "Hell's Paradise", "Demon Slayer", " KNB");
 
                 test.changeTier("Demon Slayer", Tier.D);
+                testCopy.changeTier("Demon Slayer", Tier.D);
+
                 Tier tier = test.tier("Demon Slayer");
 
                 assertEquals(tier, Tier.D);
@@ -532,13 +549,15 @@ public class AnimeLibraryKernelTest {
                 AnimeLibrary test = this.createFromArgs("DBZ", "Naruto",
                                 "One Piece", "next", "Bleach", "JBA", "next",
                                 "HxH", "JJK", "FMAB", "OPM", "DBS",
-                                "Hell's Paradise", "Demon Slayer", " KNB");
+                                "Hell's Paradise", "Demon Slayer", "KNB");
                 AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
                                 "One Piece", "next", "Bleach", "JBA", "next",
                                 "HxH", "JJK", "FMAB", "OPM", "DBS",
-                                "Hell's Paradise", "Demon Slayer", " KNB");
+                                "Hell's Paradise", "Demon Slayer", "KNB");
 
                 test.changeTier("KNB", Tier.E);
+                testCopy.changeTier("KNB", Tier.E);
+
                 Tier tier = test.tier("KNB");
 
                 assertEquals(tier, Tier.E);
@@ -565,9 +584,9 @@ public class AnimeLibraryKernelTest {
         @Test
         public final void testShowInTierOne() {
                 AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "next",
-                                "AOT");
-                AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
                                 "next", "AOT");
+                AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
+                                "next", "next", "AOT");
 
                 Set<String> set = test.showsInTier(Tier.Unranked);
 
@@ -612,7 +631,7 @@ public class AnimeLibraryKernelTest {
                 AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "next",
                                 "FMAB", "next", "AOT", "JJK");
                 AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
-                                "FMAB", "next", "next", "AOT", "JJK");
+                                "next", "FMAB", "next", "AOT", "JJK");
 
                 Set<String> set = test.showsInCurrWatch();
 
@@ -754,7 +773,7 @@ public class AnimeLibraryKernelTest {
 
         @Test
         public final void testClearEmpty() {
-                AnimeLibrary test = this.createFromArg();
+                AnimeLibrary test = this.createFromArgs();
                 AnimeLibrary testRef = this.createFromArgs();
 
                 test.clear();
@@ -764,7 +783,7 @@ public class AnimeLibraryKernelTest {
 
         @Test
         public final void testClearOne() {
-                AnimeLibrary test = this.createFromArg("DBZ");
+                AnimeLibrary test = this.createFromArgs("DBZ");
                 AnimeLibrary testRef = this.createFromArgs();
 
                 test.clear();
@@ -790,8 +809,8 @@ public class AnimeLibraryKernelTest {
 
         @Test
         public final void testTransferFromBothEmpty() {
-                AnimeLibrary test = this.createFromArg();
-                AnimeLibrary testRef = this.createFromArg();
+                AnimeLibrary test = this.createFromArgs();
+                AnimeLibrary testRef = this.createFromArgs();
                 AnimeLibrary testEmpty = this.createFromArgs();
 
                 int length = testRef.lengthOfAll();
@@ -805,7 +824,7 @@ public class AnimeLibraryKernelTest {
         @Test
         public final void testTransferFromOne() {
                 AnimeLibrary test = this.createFromArgs("DBZ");
-                AnimeLibrary testRef = this.createFromArg("AOT");
+                AnimeLibrary testRef = this.createFromArgs("AOT");
                 AnimeLibrary testEmpty = this.createFromArgs();
 
                 int length = testRef.lengthOfAll();
