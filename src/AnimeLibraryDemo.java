@@ -42,7 +42,22 @@ public class AnimeLibraryDemo {
         //adding to currWatch and Watched
         lib.addToWatching("Demon Slayer");
         lib.addToWatched("KNB"); //in Unranked tier
+        lib.addToWatched("Death Note", Tier.SS); //in SS tier
 
-        //changing tier
+        //changing tier. first check if contains (pre-condition for section),
+        //then check if in watched (pre-condition for changeTier).
+        boolean contains = lib.contains("KNB");
+        if (contains) {
+            Section section = lib.section("KNB");
+            if (section == Section.Watched) {
+                lib.changeTier("KNB", Tier.S);
+            }
+        }
+
+        //getting lengths
+        int lengthOfWatchlist = lib.length(Section.Watchlist);
+        int lengthOfCurrWatch = lib.length(Section.currWatch);
+        int lengthOfWatched = lib.length(Section.Watched);
+        int lengthOfAll = lib.lengthOfAll();
     }
 }
