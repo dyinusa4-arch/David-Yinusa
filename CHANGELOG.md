@@ -38,6 +38,13 @@ the following form: YYYY.0M.0D.
 
 - Enum Class "Tier" for AnimeLibrary
 - Enum Class "Section" for AnimeLibrary
+## [2026.4.1]
+
+### Added
+
+- Designed abstract class for AnimeLibrary component
+- Added kernel method showsInCurrWatched
+- Added kernel method showsInWatchlist
 
 ## [2026.3.9]
 
