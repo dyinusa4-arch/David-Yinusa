@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) of
 the following form: YYYY.0M.0D.
 
+## [2026.4.15]
+
+### Added
+- Kernel implementation class for AnimeLibrary
+- Updated kernel and secondary interfaces for AnimeLibrary to
+  matched the new addition of the enum classes
+
+## [2026.4.14]
+
+### Added
+
+- Enum Class "Tier" for AnimeLibrary
+- Enum Class "Section" for AnimeLibrary
+
 ## [2026.3.9]
 
 ### Added
