@@ -12,7 +12,6 @@ the following form: YYYY.0M.0D.
 
 - Added use cases for AnimeLibrary
 - Added Section kernel method to AnimeLibrary
-- Added use cases for AnimeLibrary
 
 ## [2026.4.20]
 
@@ -45,10 +44,6 @@ the following form: YYYY.0M.0D.
 - Designed abstract class for AnimeLibrary component
 - Added kernel method showsInCurrWatched
 - Added kernel method showsInWatchlist
-
-## [2026.3.9]
-
-### Added
 
 ## [2026.3.9]
 
