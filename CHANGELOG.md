@@ -11,6 +11,8 @@ the following form: YYYY.0M.0D.
 ### Added
 
 - Added use cases for AnimeLibrary
+- Added Section kernel method to AnimeLibrary
+- Added use cases for AnimeLibrary
 
 ## [2026.4.20]
 
