@@ -2,6 +2,8 @@ import components.set.Set;
 
 /**
  * Layered implementations of secondary methods for {@code AnimeLibrary}.
+ *
+ * @author David Yinusa
  */
 public abstract class AnimeLibrarySecondary implements AnimeLibrary {
 
@@ -9,22 +11,26 @@ public abstract class AnimeLibrarySecondary implements AnimeLibrary {
      * Secondary Methods
      */
 
+    @Override
     public int lengthOfAll() {
-        return this.length(Watchlist) + this.length(currWatch)
-                + this.length(Watched);
+        return this.length(Section.Watchlist) + this.length(Section.currWatch)
+                + this.length(Section.Watched);
     }
 
+    @Override
     public void addToWatching(String show) {
         this.add(show);
         this.advance(show);
     }
 
+    @Override
     public void addToWatched(String show) {
         this.add(show);
         this.advance(show);
         this.advance(show);
     }
 
+    @Override
     public void addToWatched(String show, Tier tier) {
         this.add(show);
         this.advance(show);
@@ -46,7 +52,7 @@ public abstract class AnimeLibrarySecondary implements AnimeLibrary {
             return false;
         }
 
-        if (!(o instanceOf AnimeLibrary)) {
+        if (!(obj instanceof AnimeLibrary)) {
             return false;
         }
         AnimeLibrary object = (AnimeLibrary) obj;
@@ -54,9 +60,11 @@ public abstract class AnimeLibrarySecondary implements AnimeLibrary {
         boolean equal = true;
 
         //first checks length
-        if (this.length(Watchlist) != object.length(Watchlist)
-                || this.length(currWatch) != object.length(currWatch)
-                || this.length(Watched) != object.length(Watched)) {
+        if (this.length(Section.Watchlist) != object.length(Section.Watchlist)
+                || this.length(Section.currWatch) != object
+                        .length(Section.currWatch)
+                || this.length(Section.Watched) != object
+                        .length(Section.Watched)) {
             equal = false;
         }
 
@@ -141,65 +149,65 @@ public abstract class AnimeLibrarySecondary implements AnimeLibrary {
 
         sb.append("SS: ");
 
-        Set<String> SSTier = this.showsInTier("SS");
-        while (SSTier.size() > 0) {
-            String next = SSTier.removeAny();
+        Set<String> sSTier = this.showsInTier(Tier.SS);
+        while (sSTier.size() > 0) {
+            String next = sSTier.removeAny();
             sb.append(next + ", ");
         }
 
         sb.append("; S: ");
 
-        Set<String> STier = this.showsInTier("S");
-        while (STier.size() > 0) {
-            String next = STier.removeAny();
+        Set<String> sTier = this.showsInTier(Tier.S);
+        while (sTier.size() > 0) {
+            String next = sTier.removeAny();
             sb.append(next + ", ");
         }
 
         sb.append("; A: ");
 
-        Set<String> ATier = this.showsInTier("A");
-        while (ATier.size() > 0) {
-            String next = ATier.removeAny();
+        Set<String> aTier = this.showsInTier(Tier.A);
+        while (aTier.size() > 0) {
+            String next = aTier.removeAny();
             sb.append(next + ", ");
         }
 
         sb.append("; B: ");
 
-        Set<String> BTier = this.showsInTier("B");
-        while (BTier.size() > 0) {
-            String next = BTier.removeAny();
+        Set<String> bTier = this.showsInTier(Tier.B);
+        while (bTier.size() > 0) {
+            String next = bTier.removeAny();
             sb.append(next + ", ");
         }
 
         sb.append("; C: ");
 
-        Set<String> CTier = this.showsInTier("C");
-        while (CTier.size() > 0) {
-            String next = CTier.removeAny();
+        Set<String> cTier = this.showsInTier(Tier.C);
+        while (cTier.size() > 0) {
+            String next = cTier.removeAny();
             sb.append(next + ", ");
         }
 
         sb.append("; D: ");
 
-        Set<String> DTier = this.showsInTier("D");
-        while (DTier.size() > 0) {
-            String next = DTier.removeAny();
+        Set<String> dTier = this.showsInTier(Tier.D);
+        while (dTier.size() > 0) {
+            String next = dTier.removeAny();
             sb.append(next + ", ");
         }
 
         sb.append("; E: ");
 
-        Set<String> ETier = this.showsInTier("E");
-        while (ETier.size() > 0) {
-            String next = ETier.removeAny();
+        Set<String> eTier = this.showsInTier(Tier.E);
+        while (eTier.size() > 0) {
+            String next = eTier.removeAny();
             sb.append(next + ", ");
         }
 
         sb.append("; Unranked: ");
 
-        Set<String> URTier = this.showsInTier("Unranked");
-        while (URTier.size() > 0) {
-            String next = URTier.removeAny();
+        Set<String> uRTier = this.showsInTier(Tier.Unranked);
+        while (uRTier.size() > 0) {
+            String next = uRTier.removeAny();
             sb.append(next + ", ");
         }
 

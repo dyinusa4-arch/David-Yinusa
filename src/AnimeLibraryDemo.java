@@ -17,7 +17,7 @@ public class AnimeLibraryDemo {
         String[] shows = { "DBZ", "Naruto", "One Piece", "Bleach", "Naruto",
                 "JBA", "HxH", "JJK", "One Piece", "FMAB", "DBS" };
 
-        AnimeLibrary lib = new AnimeLibrary();
+        AnimeLibrary lib = new AnimeLibrary1();
 
         for (int i = 0; i < shows.length; i++) {
             String show = shows[i];

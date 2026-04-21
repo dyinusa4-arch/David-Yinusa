@@ -26,7 +26,7 @@ import components.set.Set1L;
  *
  * @author David Yinusa
  */
-public class AnimeLibrary1 extends AnimeLibrary {
+public class AnimeLibrary1 extends AnimeLibrarySecondary {
     /*
      * Private members
      */
@@ -192,7 +192,7 @@ public class AnimeLibrary1 extends AnimeLibrary {
                 show) == Section.Watched : "Violation of: show is not in watched";
 
         //iterte over watched
-        Tier oldTier;
+        Tier oldTier = Tier.Unranked;
         for (Map.Pair<Tier, Set<String>> pair : this.watched) {
             if (pair.value().contains(show)) {
                 oldTier = pair.key();
@@ -206,8 +206,8 @@ public class AnimeLibrary1 extends AnimeLibrary {
 
         //adding to new tier
         Map.Pair<Tier, Set<String>> newPair = this.watched.remove(tier);
-        pair.value().add(show);
-        this.watched.add(pair.key(), pair.value());
+        newPair.value().add(show);
+        this.watched.add(newPair.key(), newPair.value());
 
     }
 
@@ -218,7 +218,7 @@ public class AnimeLibrary1 extends AnimeLibrary {
                 show) == Section.Watched : "Violation of: show is not in watched";
 
         //iterate over watched
-        Tier tier;
+        Tier tier = Tier.Unranked;
         for (Map.Pair<Tier, Set<String>> pair : this.watched) {
             if (pair.value().contains(show)) {
                 tier = pair.key();
