@@ -652,6 +652,49 @@ public class AnimeLibraryKernelTest {
     }
 
     /*
+     * Tests for section
+     */
+
+    @Test
+    public final void testSectionInWatchlist() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
+                "One Piece", "next", "Bleach", "JBA", "next", "HxH", "JJK");
+
+        Section section = test.section("DBZ");
+
+        assertEquals(section, Section.Watchlist);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testSectionInCurrWatch() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
+                "One Piece", "next", "Bleach", "JBA", "next", "HxH", "JJK");
+
+        Section section = test.section("Bleach");
+
+        assertEquals(section, Section.currWatch);
+        assertEquals(test, testCopy);
+    }
+
+    @Test
+    public final void testSectionInWatched() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK");
+        AnimeLibrary testCopy = this.createFromArgs("DBZ", "Naruto",
+                "One Piece", "next", "Bleach", "JBA", "next", "HxH", "JJK");
+
+        Section section = test.section("JJK");
+
+        assertEquals(section, Section.Watched);
+        assertEquals(test, testCopy);
+    }
+
+    /*
      * Standard Methods
      */
 
