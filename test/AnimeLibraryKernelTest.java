@@ -650,4 +650,104 @@ public class AnimeLibraryKernelTest {
                 && set.contains("One Piece"), true);
         assertEquals(test, testCopy);
     }
+
+    /*
+     * Standard Methods
+     */
+
+    /*
+     * Test for newInstance
+     */
+
+    @Test
+    public final void testNewInstance() {
+        AnimeLibrary test = this.createFromArgs();
+
+        AnimeLibrary testCopy = test.newInstance();
+
+        assertEquals(test, testCopy);
+    }
+
+    /*
+     * Tests for clear
+     */
+
+    @Test
+    public final void testClearEmpty() {
+        AnimeLibrary test = this.createFromArg();
+        AnimeLibrary testRef = this.createFromArgs();
+
+        test.clear();
+
+        assertEquals(test, testRef);
+    }
+
+    @Test
+    public final void testClearOne() {
+        AnimeLibrary test = this.createFromArg("DBZ");
+        AnimeLibrary testRef = this.createFromArgs();
+
+        test.clear();
+
+        assertEquals(test, testRef);
+    }
+
+    @Test
+    public final void testClearMoreThanOne() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK");
+        AnimeLibrary testRef = this.createFromArgs();
+
+        test.clear();
+
+        assertEquals(test, testRef);
+    }
+
+    /*
+     * Tests for transferFrom
+     */
+
+    @Test
+    public final void testTransferFromBothEmpty() {
+        AnimeLibrary test = this.createFromArg();
+        AnimeLibrary testRef = this.createFromArg();
+        AnimeLibrary testEmpty = this.createFromArgs();
+
+        int length = testRef.lengthOfAll();
+
+        test.transferFrom(testRef);
+
+        assertEquals(testRef, testEmpty);
+        assertEquals(test.lengthOfAll(), length);
+    }
+
+    @Test
+    public final void testTransferFromOne() {
+        AnimeLibrary test = this.createFromArgs("DBZ");
+        AnimeLibrary testRef = this.createFromArg("AOT");
+        AnimeLibrary testEmpty = this.createFromArgs();
+
+        int length = testRef.lengthOfAll();
+
+        test.transferFrom(testRef);
+
+        assertEquals(testRef, testEmpty);
+        assertEquals(test.lengthOfAll(), length);
+    }
+
+    @Test
+    public final void testTransferFromMany() {
+        AnimeLibrary test = this.createFromArgs("DBZ", "Naruto", "One Piece",
+                "next", "Bleach", "JBA", "next", "HxH", "JJK");
+        AnimeLibrary testRef = this.createFromArgs("DBZ", "Naruto", "next",
+                "AOT", "JJK");
+        AnimeLibrary testEmpty = this.createFromArgs();
+
+        int length = testRef.lengthOfAll();
+
+        test.transferFrom(testRef);
+
+        assertEquals(testRef, testEmpty);
+        assertEquals(test.lengthOfAll(), length);
+    }
 }
