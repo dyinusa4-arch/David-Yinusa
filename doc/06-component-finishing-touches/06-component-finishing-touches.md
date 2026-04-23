@@ -305,18 +305,32 @@ Take some time to fill them out honestly.
 > complete the portfolio project, how much better (or worse) do you think you
 > understand software development and why?
 
-<!-- TODO: discuss -->
+My understanding of software development has definitely increased from doing the
+portfolio project. The main projects we do in SW2 is implementing things that
+have already been created and we know that work, but in the portfolio project,
+you have to create everything from scratch, and in that, you have a lot more
+considerations that you don't think about when implementing something already
+created like a stack or queue.
 
 > Also, did the portfolio project surface any gaps in your own knowledge of
 > software development. If so, what are those gaps and how did you address them?
 
-<!-- TODO: discuss -->
+Some gaps in my own knowledge of software development was with class heirarchy.
+Doing the portfolio project allowed me to realize that my knowledge was very
+surface level in the sense where I can tell you what the heirarchy looks like,
+but I didn't truly understand how it worked until I completed the portfolio
+project. In order words, I could tell you information about the class heirarchy,
+but I didn't really understand how they worked.
 
 > Finally, as a part of completing the portfolio project, to what extent has
 > your perspective of software development changed, if at all? In other words,
 > is software development something you still enjoy? If not, why not?
 
-<!-- TODO: discuss -->
+Software development is something that I still enjoy and I enjoy it even more
+after doing the portfolio project. Being able bring something you created in your
+mind to life through software development and see it work is something that is
+really satisfying.
+
 
 > One of the challenges of completing the portfolio project is picking up a lot
 > of skills on your own. Some of these skills are, of course, software skills.
@@ -324,25 +338,36 @@ Take some time to fill them out honestly.
 > this process. Therefore, the first question is what skills did you pick up
 > through this process?
 
-<!-- TODO: discuss -->
+The main skill I picked up through the portfolio project was creative thinking.
+Being a STEM major, you don't get a lot of oppurtunities to really be creative,
+so my creative skills were really dulled and having to think through something I
+ wanted to create brought back my creative side and also allowed me to combine
+ my skills in software development with my creative skills.
+
 
 > The follow-up question is: could you rephrase these skills you picked up
 > as bullet points that you could put on a resume? Try it below.
 
-<!-- TODO: discuss -->
+- Creative Thinkning in Software Development Setting
+- Multi-faceted Problem Solving
+- Application of Class-Heirarchies
 
 > Next, how has working on this project affected your career trajectory?
 > In other words, do you now hate the topic you picked? Or, are you even more
 > interested in it? Both outcomes are valuable to your personal development.
 
-<!-- TODO: discuss -->
+My current career trajectory is software engineering and the portfolio project
+has increased my interest in it now.
 
 > Finally, consider the skills you've picked up and your current career
 > trajectory. What are some things you could do to continue on your
 > career trajectory? Also, who are some mentors you could contact to help
 > you stay on your path?
 
-<!-- TODO: discuss -->
+Something I could do to continue on my career trajectory could possibly be to
+continue working on this project further and make it something other people
+could actually use. Some mentors I could contact to help me are professors at OSU
+or other people in my personal life who are in the industry.
 
 ### Changelog
 
@@ -381,7 +406,6 @@ request merge (or at least tag your commits). This is not required.
 
 ### Submission
 
-<!-- TODO: read the submission instructions then delete this comment -->
 
 Assuming that your project is in a GitHub repo somewhere and your changes are on
 a proof-of-concept branch, then what we'll want you to do is create a pull
@@ -433,6 +457,5 @@ If you'd like to give feedback for this assignment (or any assignment, really),
 make use of [this survey][survey]. Your feedback helps make assignments
 better for future students.
 
-<!-- TODO: follow the link to share your feedback then delete this comment -->
 
 [survey]: https://forms.gle/dumXHo6A4Enucdkq9
