@@ -63,5 +63,6 @@ public class AnimeLibraryDemo {
         int lengthOfCurrWatch = lib.length(Section.currWatch);
         int lengthOfWatched = lib.length(Section.Watched);
         int lengthOfAll = lib.lengthOfAll();
+
     }
 }
